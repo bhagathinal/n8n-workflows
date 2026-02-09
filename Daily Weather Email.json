@@ -1,0 +1,163 @@
+{
+  "name": "Daily Weather Email",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -368,
+        -144
+      ],
+      "id": "158d3f4d-bfed-4026-be20-70a7ef7e25e2",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=Salem&units=metric&appid=33e78177b8ae28510e09c910b229fef2",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -16,
+        -144
+      ],
+      "id": "49f24f6f-54d0-4a94-a271-f5c90b0dd9f9",
+      "name": "HTTP Request",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "fromEmail": "hinalbhagat0101@gmail.com",
+        "toEmail": "hinalbhagat02@gmail.com",
+        "subject": "=Weather for {{$json[\"name\"]}} — {{$round($json[\"main\"][\"temp\"])}}°C, {{$json[\"weather\"][0][\"description\"]}}",
+        "emailFormat": "=html",
+        "html": "=Good morning!\n\nToday's weather for {{$json[\"name\"]}}:\n\n• Temperature: {{$json[\"main\"][\"temp\"]}}°C (Feels like {{$json[\"main\"][\"feels_like\"]}}°C)\n• Conditions: {{$json[\"weather\"][0][\"description\"]}}\n• Humidity: {{$json[\"main\"][\"humidity\"]}}%\n• Wind speed: {{$json[\"wind\"][\"speed\"]}} m/s\n\nHave a great day!\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        -144
+      ],
+      "id": "d22d8c23-acf4-475b-9aea-68e790724a7c",
+      "name": "Send an Email",
+      "webhookId": "e678a170-aed6-473e-a7e3-e4f9d99fa3e7",
+      "credentials": {
+        "smtp": {
+          "id": "XRyjZ6Kw8w1WQNFG",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "📌 Weather Alert Email Automation\n\nThis workflow runs on a schedule, fetches real-time weather data\nfrom OpenWeather API, and sends the information via email.\n\nTools used:\n• Schedule Trigger\n• HTTP Request (OpenWeather API)\n• Email (SMTP – Gmail)\n\n",
+        "height": 304,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -704,
+        -176
+      ],
+      "typeVersion": 1,
+      "id": "d237631d-aa05-49f3-ad94-d3f2871e7f40",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "⏰ Schedule Trigger\n\nTriggers the workflow automatically at a fixed time.\nCan be configured to run:\n• Daily\n• Hourly\n• Weekly\n\nUsed here to automate weather updates.\n",
+        "height": 224
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -432,
+        64
+      ],
+      "typeVersion": 1,
+      "id": "bdfff168-8fb2-4ccc-b8b9-941fa167101a",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "🌤 HTTP Request – OpenWeather API\n\nFetches current weather data for a specific city.\n\nEndpoint:\nhttps://api.openweathermap.org/data/2.5/weather\n\nReturns:\n• Temperature\n• Weather condition\n• Humidity\n• Wind speed\n\n",
+        "height": 288,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -96,
+        48
+      ],
+      "typeVersion": 1,
+      "id": "725528c9-09b7-4a37-b216-89362fe14282",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "📧 Send Email\n\nSends the fetched weather information via email\nusing SMTP (Gmail App Password).\n\nUseful for:\n• Daily weather alerts\n• Notifications\n• Reports\n\n",
+        "height": 240
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        48
+      ],
+      "typeVersion": 1,
+      "id": "0dc04c2d-30ba-494c-ac1b-235bf1129b33",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "3f121ce5-dd07-4561-9e60-4e855be83f79",
+  "meta": {
+    "instanceId": "5160bfa3c25dab069103e3f416f11a5d3b0ce499557c4e528cdf296eeb575b03"
+  },
+  "id": "3qpdaXsLDDZ4aJg94tFo-",
+  "tags": []
+}
