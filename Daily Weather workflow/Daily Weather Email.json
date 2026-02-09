@@ -22,7 +22,7 @@
     },
     {
       "parameters": {
-        "url": "https://api.openweathermap.org/data/2.5/weather?q=Salem&units=metric&appid=33e78177b8ae28510e09c910b229fef2",
+        "url": "https://api.openweathermap.org/data/2.5/weather?q=Salem&units=metric&appid=YOUT_API_KEY",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
