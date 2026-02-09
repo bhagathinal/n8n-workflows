@@ -1,0 +1,67 @@
+{
+  "name": "Simple Email Test",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        0
+      ],
+      "id": "cc410ded-f6a2-4bc8-b4e9-cf7aa7529827",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "fromEmail": "hinalbhagat0101@gmail.com",
+        "toEmail": "hinalbhagat02@gmail.com",
+        "subject": "Test Email",
+        "emailFormat": "text",
+        "text": "Hello! This is a test email from n8n.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        -112,
+        0
+      ],
+      "id": "d9946c34-80e4-4087-8018-eb8774d31d0d",
+      "name": "Send an Email",
+      "webhookId": "5fe02b8b-eac5-4edc-95e9-f241307a8a8e",
+      "credentials": {
+        "smtp": {
+          "id": "XRyjZ6Kw8w1WQNFG",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "e5222e4e-f869-49dc-9fd2-7c73cbf8e930",
+  "meta": {
+    "instanceId": "5160bfa3c25dab069103e3f416f11a5d3b0ce499557c4e528cdf296eeb575b03"
+  },
+  "id": "K7-BG0j-n1T9DxXEa3l0-",
+  "tags": []
+}
